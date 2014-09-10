@@ -10,15 +10,15 @@ import org.analogweb.netty.HttpServers
 
 class Hello extends Analogweb with Resolvers {
 
-  def hello = get("/hello") { implicit r =>
-    s"Hello ${parameter.of("p")} Scala!"
-  }
-
   val user: Request => User = { implicit r =>
     User(parameter.of("p").get)
   }
+  
+  def helloworld = get("/helloworld") { r =>
+    "Hello World"
+  }
 
-  def hello2 = get("/hello2") { implicit r =>
+  def hello = get("/hello") { implicit r =>
     s"Hello ${mapping.to[User](user)} Scala!"
   }
 
@@ -26,7 +26,7 @@ class Hello extends Analogweb with Resolvers {
     Ok(asJson(User("snowgoose")))
   }
 
-  def helloJsonRead = post("/helloJsonRead") { implicit r =>
+  def helloViaJson = post("/helloViaJson") { implicit r =>
     json.as[User].map(o => Ok(asJson(o))).getOrElse(BadRequest)
   }
 }
