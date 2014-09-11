@@ -5,7 +5,7 @@ Analogweb Framework
 
 Analogweb is a tiny HTTP oriented framework.
 
-Installing [sbt]:(http://www.scala-sbt.org) and run.
+Installing [Scala](http://www.scala-lang.org/) and [sbt](http://www.scala-sbt.org) then run.
 
 ```
 $ sbt run 
