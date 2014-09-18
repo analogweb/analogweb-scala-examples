@@ -3,7 +3,7 @@ import Keys._
 
 object BuildSettings {
     val buildOrganization = "org.analogweb"
-    val buildVersion      = "0.9.0"
+    val buildVersion      = "0.9.1-SNAPSHOT"
     val buildScalaVersion = "2.10.4"
 
     val buildSettings = Defaults.defaultSettings ++ Seq (
@@ -13,7 +13,7 @@ object BuildSettings {
     )
 }
 object Dependencies {
-  val scalaplugin = "org.analogweb" % "analogweb-scala_2.10" % "0.9.0"
+  val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.1-SNAPSHOT"
   val netty = "org.analogweb" % "analogweb-netty" % "0.9.0"
 }
 
