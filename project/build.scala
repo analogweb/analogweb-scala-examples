@@ -13,14 +13,18 @@ object BuildSettings {
     )
 }
 object Dependencies {
-  val scalaplugin = "org.analogweb" % "analogweb-scala_2.10" % "0.9.0"
-  val netty = "org.analogweb" % "analogweb-netty" % "0.9.0"
+  val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.1-SNASPHOT"
+  val nettyplugin = "org.analogweb" % "analogweb-netty" % "0.9.1-SNAPSHOT"
+  val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % "0.9.1-SNAPSHOT"
+  val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
 }
 
 object Resolvers {
   val m2local = Resolver.mavenLocal 
+  val sonatype = Resolver.sonatypeRepo("snapshots")
   val all = Seq (
-    m2local
+    m2local,
+    sonatype
   )
 }
 
@@ -34,8 +38,10 @@ object AnalogwebScala extends Build {
     settings = buildSettings ++ Seq (
       resolvers ++= Resolvers.all,
       libraryDependencies ++= Seq(
-          netty,
-          scalaplugin
+          scalaplugin,
+          nettyplugin,
+          slf4jplugin,
+          logback
       ),
       artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
             artifact.name + "-" + module.revision + "." + artifact.extension
