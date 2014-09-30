@@ -1,5 +1,7 @@
+logs
 .project
 .classpath
 .settings
 .swp
 target
+.cache
