@@ -22,6 +22,12 @@ class Hello extends Analogweb with Resolvers {
     s"Hello ${mapping.to[User](user)} Scala!"
   }
 
+  def upload = post("/upload") { implicit r =>
+    multipart.as[java.io.InputStream]("filedata").map { is =>
+      scala.io.Source.fromInputStream(is).getLines().mkString("\n")
+    }.getOrElse(BadRequest)
+  }
+  
   def helloJson = get("/helloJson") { implicit r =>
     Ok(asJson(User("snowgoose")))
   }
