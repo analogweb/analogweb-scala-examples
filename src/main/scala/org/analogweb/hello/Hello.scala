@@ -1,4 +1,4 @@
-package org.analogweb.helloscala
+package org.analogweb.hello
 
 import java.net.URI
 import org.analogweb.scala.Analogweb
