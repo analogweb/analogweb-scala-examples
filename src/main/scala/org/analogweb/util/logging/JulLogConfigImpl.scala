@@ -9,7 +9,7 @@ class JulLogConfigImpl extends JulLogConfig {
 
   override def createLoggerInternal(name: String, manager: LogManager) = {
     val logger = Logger.getLogger(name)
-    logger.setLevel(Level.FINE)
+    logger.setLevel(Level.INFO)
     logger.addHandler(createConsoleHandler)
     manager.addLogger(logger)
     logger
@@ -18,7 +18,7 @@ class JulLogConfigImpl extends JulLogConfig {
   def createConsoleHandler = {
     val console = new ConsoleHandler()
     console.setFormatter(new JulLogFormatter())
-    console.setLevel(Level.FINE)
+    console.setLevel(Level.INFO)
     console
   }
 }

@@ -1,7 +1,6 @@
 package org.analogweb.helloscala
 
 import java.net.URI
-import org.analogweb.core.httpserver._
 import org.analogweb.scala.Analogweb
 import org.analogweb.scala.Resolvers
 import org.analogweb.scala.Responses._
@@ -11,15 +10,15 @@ import org.analogweb.netty.HttpServers
 class Hello extends Analogweb with Resolvers {
 
   val user: Request => User = { implicit r =>
-    User(parameter.of("p").get)
+    User(parameter.of("p").getOrElse("Anonymous"))
   }
   
   def helloworld = get("/helloworld") { r =>
     "Hello World"
   }
 
-  def hello = get("/hello") { implicit r =>
-    s"Hello ${mapping.to[User](user)} Scala!"
+  def helloAnyone = get("/helloAnyone") { implicit r =>
+    s"Hello ${mapping.to[User](user).name}!"
   }
 
   def upload = post("/upload") { implicit r =>
@@ -28,11 +27,11 @@ class Hello extends Analogweb with Resolvers {
     }.getOrElse(BadRequest)
   }
   
-  def helloJson = get("/helloJson") { implicit r =>
-    Ok(asJson(User("snowgoose")))
+  def getJson = get("/json") { implicit r =>
+    Ok(asJson(User("snowgooseyk")))
   }
 
-  def helloViaJson = post("/helloViaJson") { implicit r =>
+  def postJson = post("/json") { implicit r =>
     json.as[User].map(o => Ok(asJson(o))).getOrElse(BadRequest)
   }
 }
