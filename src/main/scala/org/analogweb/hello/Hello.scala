@@ -10,15 +10,15 @@ import org.analogweb.netty.HttpServers
 class Hello extends Analogweb with Resolvers {
 
   val user: Request => User = { implicit r =>
-    User(parameter.of("p").getOrElse("Anonymous"))
+    User(parameter.of("n").getOrElse("Anonymous"))
   }
   
-  def helloworld = get("/helloworld") { r =>
-    "Hello World"
+  def ping = get("/ping") { r =>
+    "PONG!"
   }
 
-  def helloAnyone = get("/helloAnyone") { implicit r =>
-    s"Hello ${mapping.to[User](user).name}!"
+  def helloworld = get("/helloworld") { implicit r =>
+    s"Hello ${mapping.to[User](user).name} World!"
   }
 
   def upload = post("/upload") { implicit r =>
