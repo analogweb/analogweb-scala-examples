@@ -1,5 +1,7 @@
 import sbt._
 import Keys._
+import sbtassembly.AssemblyPlugin._
+import sbtassembly.AssemblyKeys._
 
 object BuildSettings {
     val buildOrganization = "org.analogweb"
@@ -11,16 +13,20 @@ object BuildSettings {
       version      := buildVersion,
       scalaVersion := buildScalaVersion
     )
+    val asmSettings = assemblySettings ++ Seq (
+      assemblyJarName := "analogweb-hello-scala-" + buildVersion + ".jar"
+    )
 }
+
 object Dependencies {
-  val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.1"
+  val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.2-SNAPSHOT"
   val nettyplugin = "org.analogweb" % "analogweb-netty" % "0.9.1"
   val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % "0.9.1"
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
 }
 
 object Resolvers {
-  val m2local = Resolver.mavenLocal 
+  val m2local = Resolver.mavenLocal
   val sonatype = Resolver.sonatypeRepo("snapshots")
   val all = Seq (
     m2local,
@@ -33,9 +39,9 @@ object AnalogwebScala extends Build {
   import Dependencies._
 
   lazy val root = Project (
-    id = "helloscala",
+    id = "analogweb-hello-scala",
     base = file("."),
-    settings = buildSettings ++ Seq (
+    settings = buildSettings ++ asmSettings ++ Seq (
       resolvers ++= Resolvers.all,
       libraryDependencies ++= Seq(
           scalaplugin,
