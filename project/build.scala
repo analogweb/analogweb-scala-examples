@@ -19,9 +19,9 @@ object BuildSettings {
 }
 
 object Dependencies {
-  val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.2-SNAPSHOT"
-  val nettyplugin = "org.analogweb" % "analogweb-netty" % "0.9.1"
-  val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % "0.9.1"
+  val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.3-SNAPSHOT"
+  val nettyplugin = "org.analogweb" % "analogweb-netty" % "0.9.2"
+  val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % "0.9.2"
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
 }
 

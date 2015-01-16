@@ -13,25 +13,25 @@ class Hello extends Analogweb with Resolvers {
     User(parameter.of("n").getOrElse("Anonymous"))
   }
   
-  def ping = get("/ping") { r =>
+  get("/ping") { r =>
     "PONG!"
   }
 
-  def helloworld = get("/helloworld") { implicit r =>
+  get("/helloworld") { implicit r =>
     s"Hello ${mapping.to[User](user).name} World!"
   }
 
-  def upload = post("/upload") { implicit r =>
+  post("/upload") { implicit r =>
     multipart.as[java.io.InputStream]("filedata").map { is =>
       scala.io.Source.fromInputStream(is).getLines().mkString("\n")
     }.getOrElse(BadRequest)
   }
   
-  def getJson = get("/json") { implicit r =>
+  get("/json") { implicit r =>
     Ok(asJson(User("snowgooseyk")))
   }
 
-  def postJson = post("/json") { implicit r =>
+  post("/json") { implicit r =>
     json.as[User].map(o => Ok(asJson(o))).getOrElse(BadRequest)
   }
 }
