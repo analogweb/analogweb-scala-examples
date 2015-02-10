@@ -5,7 +5,7 @@ import sbtassembly.AssemblyKeys._
 
 object BuildSettings {
     val buildOrganization = "org.analogweb"
-    val buildVersion      = "0.9.2-SNAPSHOT"
+    val buildVersion      = "0.9.3-SNAPSHOT"
     val buildScalaVersion = "2.10.4"
 
     val buildSettings = Defaults.defaultSettings ++ Seq (
@@ -20,8 +20,8 @@ object BuildSettings {
 
 object Dependencies {
   val scalaplugin = "org.analogweb" %% "analogweb-scala" % "0.9.3-SNAPSHOT"
-  val nettyplugin = "org.analogweb" % "analogweb-netty" % "0.9.2"
-  val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % "0.9.2"
+  val nettyplugin = "org.analogweb" % "analogweb-netty" % "0.9.3-SNAPSHOT"
+  val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % "0.9.3-SNAPSHOT"
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
 }
 

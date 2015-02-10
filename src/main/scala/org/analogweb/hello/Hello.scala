@@ -1,11 +1,11 @@
 package org.analogweb.hello
 
 import java.net.URI
+import org.analogweb.core.Servers
 import org.analogweb.scala.Analogweb
 import org.analogweb.scala.Resolvers
 import org.analogweb.scala.Responses._
 import org.analogweb.scala.Request
-import org.analogweb.netty.HttpServers
 
 class Hello extends Analogweb with Resolvers {
 
@@ -38,8 +38,8 @@ class Hello extends Analogweb with Resolvers {
 
 case class User(val name: String)
 
-object Run {
+object Runner {
   def main(args: Array[String]): Unit = {
-    HttpServers.create("http://localhost:8080").run
+    Servers.create("http://localhost:8080").run
   }
 }
