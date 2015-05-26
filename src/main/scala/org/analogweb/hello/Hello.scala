@@ -1,29 +1,33 @@
 package org.analogweb.hello
 
 import java.net.URI
+import java.io.InputStream
+
+import scala.io.Source
+
 import org.analogweb.core.Servers
-import org.analogweb.scala.Analogweb
-import org.analogweb.scala.Resolvers
+import org.analogweb.scala._
 import org.analogweb.scala.Responses._
-import org.analogweb.scala.Request
 
-class Hello extends Analogweb with Resolvers {
+object Hello extends Analogweb with Resolvers {
 
-  val user: Request => User = { implicit r =>
+  def main(args: Array[String]) = Servers.run()
+  
+  val userMapping: Request => User = { implicit r =>
     User(parameter.of("n").getOrElse("Anonymous"))
   }
   
-  get("/ping") { r =>
-    "PONG!"
+  get("/ping") {
+      "PONG!"
   }
 
   get("/helloworld") { implicit r =>
-    s"Hello ${mapping.to[User](user).name} World!"
+    s"Hello ${mapping.to[User](userMapping).name} World!"
   }
 
   post("/upload") { implicit r =>
-    multipart.as[java.io.InputStream]("filedata").map { is =>
-      scala.io.Source.fromInputStream(is).getLines().mkString("\n")
+    multipart.as[InputStream]("filedata").map { is =>
+      Source.fromInputStream(is).getLines().mkString("\n")
     }.getOrElse(BadRequest)
   }
   
@@ -38,8 +42,3 @@ class Hello extends Analogweb with Resolvers {
 
 case class User(val name: String)
 
-object Runner {
-  def main(args: Array[String]): Unit = {
-    Servers.create("http://localhost:8080").run
-  }
-}
