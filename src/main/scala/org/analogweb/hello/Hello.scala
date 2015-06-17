@@ -5,6 +5,7 @@ import java.io.InputStream
 
 import scala.io.Source
 
+import org.analogweb._
 import org.analogweb.core.Servers
 import org.analogweb.scala._
 import org.analogweb.scala.Responses._
@@ -21,10 +22,22 @@ object Hello extends Analogweb with Resolvers {
       "PONG!"
   }
 
+  get("/path/*") { implicit r =>
+    context.as[RequestPath].get.getActualPath 
+  }
+  
   get("/helloworld") { implicit r =>
     s"Hello ${mapping.to[User](userMapping).name} World!"
   }
 
+  get("/hello/{who}/world") { implicit r =>
+    s"Hello ${path.of("who").getOrElse("Anonymous")} World!"
+  }
+  
+  get("/agent") { implicit r =>
+    s"Hello World ${r.headerOption("User-Agent").getOrElse("Unknown")}"
+  }
+  
   post("/upload") { implicit r =>
     multipart.as[InputStream]("filedata").map { is =>
       Source.fromInputStream(is).getLines().mkString("\n")
