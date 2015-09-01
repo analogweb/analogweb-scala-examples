@@ -4,30 +4,40 @@ import java.net.URI
 import java.io.InputStream
 
 import scala.io.Source
+import scala.concurrent.Future
 
-import org.analogweb._
+import org.analogweb.RequestPath
 import org.analogweb.core.Servers
-import org.analogweb.scala._
-import org.analogweb.scala.Responses._
+import org.analogweb.scala.{Analogweb,Request}
+import org.analogweb.scala.Execution.Implicits._
 
-object Hello extends Analogweb with Resolvers {
+object Hello extends Analogweb {
 
   def main(args: Array[String]) = Servers.run()
   
-  val userMapping: Request => User = { implicit r =>
-    User(parameter.of("n").getOrElse("Anonymous"))
-  }
-  
   get("/ping") {
-      "PONG!"
+    "PONG"
+  }
+
+  get("/calc") {
+    for {
+      one   <- Future(1) 
+      two   <- Future(2) 
+      three <- Future(3) 
+      four  <- Future(4) 
+    } yield s"${one + two + three + four}"
   }
 
   get("/path/*") { implicit r =>
     context.as[RequestPath].get.getActualPath 
   }
+
+  def user: Request => User = { implicit r =>
+    User(parameter.of("n").getOrElse("Analogweb"))
+  }
   
   get("/helloworld") { implicit r =>
-    s"Hello ${mapping.to[User](userMapping).name} World!"
+    s"Hello ${user.name} World!"
   }
 
   get("/hello/{who}/world") { implicit r =>
