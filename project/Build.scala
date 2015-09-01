@@ -1,5 +1,6 @@
 import sbt._
 import Keys._
+import sbtassembly._
 import sbtassembly.AssemblyPlugin._
 import sbtassembly.AssemblyKeys._
 
@@ -14,19 +15,25 @@ object BuildSettings {
       scalaVersion := buildScalaVersion
     )
     val asmSettings = assemblySettings ++ Seq (
-      assemblyJarName := "analogweb-hello-scala-" + buildVersion + ".jar"
+      assemblyJarName := "analogweb-hello-scala-" + buildVersion + ".jar",
+      assemblyMergeStrategy in assembly := {
+        case PathList(ps @ _*) if ps.last endsWith ".properties" => MergeStrategy.first 
+        case x =>
+          val oldStrategy = (assemblyMergeStrategy in assembly).value
+          oldStrategy(x)
+      }
     )
 }
 
 object Dependencies {
-  val analogwebVersion = "0.9.7"
+  val analogwebVersion = "0.9.9-SNAPSHOT"
   val scalaplugin = "org.analogweb" %% "analogweb-scala" % analogwebVersion 
   val nettyplugin = "org.analogweb" % "analogweb-netty" % analogwebVersion 
   val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % analogwebVersion 
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val all = Seq (
     scalaplugin,
-//    nettyplugin,
+    nettyplugin,
     slf4jplugin,
     logback
   )
