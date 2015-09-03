@@ -11,9 +11,21 @@ import org.analogweb.core.Servers
 import org.analogweb.scala.{Analogweb,Request}
 import org.analogweb.scala.Execution.Implicits._
 
+import java.net.URI
+import javax.inject.Inject
+import com.google.inject._
+import net.codingwell.scalaguice._
+import org.analogweb.core.DefaultApplicationProperties
+import org.analogweb.guice.GuiceApplicationContext
+
 object Hello extends Analogweb {
 
-  def main(args: Array[String]) = Servers.run()
+  def main(args: Array[String]) = {
+    val injector = Guice.createInjector(new MyModule())
+    val context = GuiceApplicationContext.context(injector)
+    val props = DefaultApplicationProperties.defaultProperties()
+    Servers.create(URI.create("http://localhost:8080"),props,context).run()
+  }
   
   get("/ping") {
     "PONG"
@@ -65,3 +77,19 @@ object Hello extends Analogweb {
 
 case class User(val name: String)
 
+class SayHello {
+  def hello = "hello!"
+}
+
+class UsingGuice @Inject() (s: SayHello) extends Analogweb {
+  get("/guice") {
+    s.hello
+  }
+}
+
+class MyModule extends AbstractModule with ScalaModule {
+  def configure {
+    bind[SayHello]
+    bind[UsingGuice]
+  }
+}

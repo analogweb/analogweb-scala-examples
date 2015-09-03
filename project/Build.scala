@@ -30,11 +30,15 @@ object Dependencies {
   val scalaplugin = "org.analogweb" %% "analogweb-scala" % analogwebVersion 
   val nettyplugin = "org.analogweb" % "analogweb-netty" % analogwebVersion 
   val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % analogwebVersion 
+  val guiceplugin = "org.analogweb" % "analogweb-guice" % analogwebVersion
+  val scalaguice  = "net.codingwell" %% "scala-guice" % "4.0.0"
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val all = Seq (
     scalaplugin,
     nettyplugin,
     slf4jplugin,
+    guiceplugin,
+    scalaguice,
     logback
   )
 }
