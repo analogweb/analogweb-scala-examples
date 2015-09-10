@@ -26,7 +26,7 @@ object BuildSettings {
 }
 
 object Dependencies {
-  val analogwebVersion = "0.9.9-SNAPSHOT"
+  val analogwebVersion = "0.9.10"
   val scalaplugin = "org.analogweb" %% "analogweb-scala" % analogwebVersion 
   val nettyplugin = "org.analogweb" % "analogweb-netty" % analogwebVersion 
   val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % analogwebVersion 

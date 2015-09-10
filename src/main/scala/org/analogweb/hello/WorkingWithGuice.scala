@@ -14,7 +14,7 @@ class HelloAnalogwebWithGuice @Inject() (s: SayHello) extends Analogweb {
 }
 
 class SayHello {
-  def hello = "hello!"
+  def hello = "Hello Guice!"
 }
 
 class HelloGuiceModule extends AbstractModule with ScalaModule {

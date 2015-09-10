@@ -15,5 +15,5 @@ And you will get
 
 ```
 $ curl http://localhost:8080/helloworld
-$ Hello  World!
+$ Hello Analogweb World!
 ```
