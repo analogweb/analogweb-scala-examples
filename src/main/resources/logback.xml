@@ -23,7 +23,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.analogweb" level="DEBUG" />
+	<logger name="org.analogweb" level="INFO" />
 	<logger name="io.netty" level="WARN" />
 
 	<root level="ERROR">

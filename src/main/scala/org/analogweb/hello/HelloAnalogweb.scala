@@ -1,32 +1,16 @@
 package org.analogweb.hello
 
-import java.net.URI
 import java.io.InputStream
 
 import scala.io.Source
 import scala.concurrent.Future
 
 import org.analogweb.RequestPath
-import org.analogweb.core.Servers
 import org.analogweb.scala.{Analogweb,Request}
 import org.analogweb.scala.Execution.Implicits._
 
-import java.net.URI
-import javax.inject.Inject
-import com.google.inject._
-import net.codingwell.scalaguice._
-import org.analogweb.core.DefaultApplicationProperties
-import org.analogweb.guice.GuiceApplicationContext
+object HelloAnalogweb extends Analogweb {
 
-object Hello extends Analogweb {
-
-  def main(args: Array[String]) = {
-    val injector = Guice.createInjector(new MyModule())
-    val context = GuiceApplicationContext.context(injector)
-    val props = DefaultApplicationProperties.defaultProperties()
-    Servers.create(URI.create("http://localhost:8080"),props,context).run()
-  }
-  
   get("/ping") {
     "PONG"
   }
@@ -41,7 +25,9 @@ object Hello extends Analogweb {
   }
 
   get("/path/*") { implicit r =>
-    context.as[RequestPath].get.getActualPath 
+    context.as[RequestPath].map {p =>
+      p.getActualPath
+    }.getOrElse(NotFound)
   }
 
   def user: Request => User = { implicit r =>
@@ -75,21 +61,4 @@ object Hello extends Analogweb {
   }
 }
 
-case class User(val name: String)
-
-class SayHello {
-  def hello = "hello!"
-}
-
-class UsingGuice @Inject() (s: SayHello) extends Analogweb {
-  get("/guice") {
-    s.hello
-  }
-}
-
-class MyModule extends AbstractModule with ScalaModule {
-  def configure {
-    bind[SayHello]
-    bind[UsingGuice]
-  }
-}
+case class User(name:String)
