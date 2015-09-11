@@ -3,6 +3,7 @@ import Keys._
 import sbtassembly._
 import sbtassembly.AssemblyPlugin._
 import sbtassembly.AssemblyKeys._
+import com.typesafe.sbt.packager.archetypes._
 
 object BuildSettings {
     val buildOrganization = "org.analogweb"
@@ -65,5 +66,5 @@ object AnalogwebScala extends Build {
             artifact.name + "-" + module.revision + "." + artifact.extension
       }
     )
-  )
+  ).enablePlugins(JavaAppPackaging)
 }
