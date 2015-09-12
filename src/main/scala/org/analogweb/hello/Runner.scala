@@ -10,7 +10,7 @@ object Runner {
 
   def main(args: Array[String]) = {
     val injector = Guice.createInjector(new HelloGuiceModule())
-    val port = sys.props("http.port")
+    val port = sys.props.get("http.port").getOrElse("8000")
     val uri = URI.create("http://0.0.0.0:"+port.toInt)
     Servers.create(uri,defaultProperties(),context(injector)).run()
   }
