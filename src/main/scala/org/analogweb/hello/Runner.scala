@@ -11,7 +11,7 @@ object Runner {
   def main(args: Array[String]) = {
     val injector = Guice.createInjector(new HelloGuiceModule())
     val port = sys.props("http.port")
-    val uri = URI.create("http://localhost:"+port.toInt)
+    val uri = URI.create("http://0.0.0.0:"+port.toInt)
     Servers.create(uri,defaultProperties(),context(injector)).run()
   }
 
