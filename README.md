@@ -1,5 +1,7 @@
-Analogweb Framework
+Analogweb Framework Scala Examples
 ===============================================
+
+[![Heroku](https://heroku-badge.herokuapp.com/?app=analogweb-scala&root=ping&style=flat)](https://analogweb-scala.herokuapp.com/helloworld)
 
 # Quick Start
 
