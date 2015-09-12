@@ -36,7 +36,7 @@ object Dependencies {
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val all = Seq (
     scalaplugin,
-    nettyplugin,
+//    nettyplugin,
     slf4jplugin,
     guiceplugin,
     scalaguice,
