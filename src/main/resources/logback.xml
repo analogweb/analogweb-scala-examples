@@ -24,7 +24,7 @@
 	</appender>
 
 	<logger name="org.analogweb" level="INFO" />
-	<logger name="io.netty" level="WARN" />
+	<logger name="io.netty" level="INFO" />
 
 	<root level="ERROR">
 		<appender-ref ref="STDOUT" />
