@@ -5,11 +5,21 @@ import java.io.InputStream
 import scala.io.Source
 import scala.concurrent.Future
 
-import org.analogweb.RequestPath
-import org.analogweb.scala.{Analogweb,Request}
+import org.analogweb.{Renderable,RequestPath}
+import org.analogweb.util.logging.Logs
+import org.analogweb.scala._
 import org.analogweb.scala.Execution.Implicits._
 
 object HelloAnalogweb extends Analogweb {
+
+  val log = Logs.getLog("HelloAnalogweb")
+
+  implicit val around = before { r => 
+    log.debug("Before")
+    pass()
+  } :+ after {
+    case r:Renderable => log.debug("After");r
+  }
 
   get("/ping") {
     "PONG"
@@ -31,15 +41,19 @@ object HelloAnalogweb extends Analogweb {
   }
 
   def user: Request => User = { implicit r =>
-    User(parameter.of("n").getOrElse("Analogweb"))
+    User(param("n"))
   }
   
-  get("/helloworld") { implicit r =>
-    s"Hello ${user.name} World!"
+  val validateParameter = before { implicit r =>
+    parameter.of("n").map(x => pass()).getOrElse(reject(BadRequest))
   }
 
+  get("/helloworld") { implicit r =>
+    s"Hello ${user.name} World!"
+  }(around ++ validateParameter)
+
   get("/hello/{who}/world") { implicit r =>
-    s"Hello ${path.of("who").getOrElse("Anonymous")} World!"
+    s"Hello ${param("who")} World!"
   }
   
   get("/agent") { implicit r =>
@@ -57,7 +71,7 @@ object HelloAnalogweb extends Analogweb {
   }
 
   post("/json") { implicit r =>
-    json.as[User].map(o => Ok(asJson(o))).getOrElse(BadRequest)
+    json.as[User].map(x => Ok(asJson(x))).getOrElse(BadRequest)
   }
 }
 

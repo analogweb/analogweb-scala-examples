@@ -16,6 +16,6 @@ $ sbt run
 And you will get
 
 ```
-$ curl http://localhost:8080/helloworld
-$ Hello Analogweb World!
+$ curl http://localhost:8000/ping
+$ PONG!
 ```
