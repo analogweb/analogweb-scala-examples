@@ -27,7 +27,7 @@ object BuildSettings {
 }
 
 object Dependencies {
-  val analogwebVersion = "0.9.10"
+  val analogwebVersion = "0.9.11"
   val scalaplugin = "org.analogweb" %% "analogweb-scala" % analogwebVersion 
   val nettyplugin = "org.analogweb" % "analogweb-netty" % analogwebVersion 
   val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % analogwebVersion 
@@ -36,7 +36,6 @@ object Dependencies {
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val all = Seq (
     scalaplugin,
-    nettyplugin,
     slf4jplugin,
     guiceplugin,
     scalaguice,
