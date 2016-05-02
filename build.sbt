@@ -21,7 +21,7 @@ val asmSettings = assemblySettings ++ Seq (
   }
 )
 
-val analogwebVersion = "0.9.11"
+val analogwebVersion = "0.9.12"
 val scalaplugin = "org.analogweb" %% "analogweb-scala" % analogwebVersion 
 val nettyplugin = "org.analogweb" % "analogweb-netty" % analogwebVersion 
 val slf4jplugin = "org.analogweb" % "analogweb-slf4j" % analogwebVersion 
@@ -30,7 +30,7 @@ val scalaguice  = "net.codingwell" %% "scala-guice" % "4.0.0"
 val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
 val allDependency = Seq (
     scalaplugin,
-//  nettyplugin,
+    nettyplugin,
     slf4jplugin,
     guiceplugin,
     scalaguice,
