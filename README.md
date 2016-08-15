@@ -19,3 +19,10 @@ And you will get
 $ curl localhost:8000/ping
 $ PONG!
 ```
+
+# Build and run on Docker container
+
+```
+$ docker build . -t analogweb-scala-example
+$ docker run -p 8000:8000 analogweb-scala-example
+```
