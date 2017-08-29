@@ -1,16 +1,13 @@
-package org.analogweb.hello
+package analogweb.example
 
 import java.io.InputStream
-
 import scala.io.Source
 import scala.concurrent.Future
-
-import org.analogweb.{Renderable,RequestPath}
+import analogweb._,json4s._
 import org.analogweb.util.logging.Logs
-import org.analogweb.scala._
-import org.analogweb.scala.Execution.Implicits._
+import org.analogweb._,scala._
 
-object HelloAnalogweb extends Analogweb {
+object HelloAnalogweb {
 
   val log = Logs.getLog("HelloAnalogweb")
 
@@ -21,8 +18,14 @@ object HelloAnalogweb extends Analogweb {
     case r:Renderable => log.debug("After");r
   }
 
-  get("/ping") {
+  val routes = get("/ping") {
     "PONG"
+  }
+
+  get("/file") { 
+    Future {
+      Source.fromFile(new java.io.File("/Users/yukio/l.txt")).getLines().mkString("\n")
+    }
   }
 
   get("/calc") {
@@ -31,7 +34,7 @@ object HelloAnalogweb extends Analogweb {
       two   <- Future(2) 
       three <- Future(3) 
       four  <- Future(4) 
-    } yield s"${one + two + three + four}"
+    } yield "${one + two + three + four}"
   }
 
   get("/path/*") { implicit r =>
@@ -45,7 +48,7 @@ object HelloAnalogweb extends Analogweb {
   }
   
   val validateParameter = before { implicit r =>
-    parameter.of("n").map(x => pass()).getOrElse(reject(BadRequest))
+    parameter.asOption[String]("n").map(x => pass()).getOrElse(reject(BadRequest))
   }
 
   get("/helloworld") { implicit r =>

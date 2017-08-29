@@ -1,19 +1,12 @@
-package org.analogweb.hello
+package analogweb.example
 
-import java.net.URI
-import com.google.inject._
-import org.analogweb.core.Servers
-import org.analogweb.core.DefaultApplicationProperties._
-import org.analogweb.guice.GuiceApplicationContext._
+import analogweb._
 
 object Runner {
 
-  def main(args: Array[String]) = {
-    val injector = Guice.createInjector(new HelloGuiceModule())
-    val port = sys.props.get("http.port").getOrElse("8000")
-    val uri = URI.create("http://0.0.0.0:"+port.toInt)
-    Servers.create(uri,defaultProperties(),context(injector)).run()
-  }
+  def main(args: Array[String]) = http("0.0.0.0",8000){
+    HelloAnalogweb.routes
+  }.run
 
 } 
 
