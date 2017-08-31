@@ -18,25 +18,23 @@ object HelloAnalogweb {
     case r:Renderable => log.debug("After");r
   }
 
-  val routes = get("/ping") {
+  val routes = 
+  get("/ping") {
     "PONG"
-  }
-
+  } ++
   get("/file") { 
     Future {
       Source.fromFile(new java.io.File("/Users/yukio/l.txt")).getLines().mkString("\n")
     }
-  }
-
+  } ++ 
   get("/calc") {
     for {
       one   <- Future(1) 
       two   <- Future(2) 
       three <- Future(3) 
       four  <- Future(4) 
-    } yield "${one + two + three + four}"
-  }
-
+    } yield s"${one + two + three + four}"
+  } ++
   get("/path/*") { implicit r =>
     context.as[RequestPath].map {p =>
       p.getActualPath
