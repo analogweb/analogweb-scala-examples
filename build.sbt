@@ -5,7 +5,7 @@ val buildOrganization = "org.analogweb"
 val buildVersion      = "1"
 val buildScalaVersion = "2.12.3"
 
-val buildSettings = Defaults.defaultSettings ++ Seq (
+val buildSettings = Seq (
   organization := buildOrganization,
   version      := buildVersion,
   scalaVersion := buildScalaVersion
@@ -39,14 +39,15 @@ val allResolver = Seq(
 
 fork in run := true
 
-lazy val root = Project (
-  id = "analogweb-hello-scala",
-  base = file("."),
-  settings = buildSettings ++ asmSettings ++ Seq (
+lazy val root =
+  (project in file(".")).
+  settings(buildSettings: _*).
+  settings(asmSettings).
+  settings(
+    name := "analogweb-scala-example",
     resolvers ++= allResolver,
     libraryDependencies ++= allDependency,
     artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
           artifact.name + "-" + module.revision + "." + artifact.extension
     }
-  )
 ).enablePlugins(JavaAppPackaging)
