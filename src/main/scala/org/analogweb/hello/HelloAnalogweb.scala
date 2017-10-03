@@ -3,9 +3,11 @@ package analogweb.example
 import java.io.InputStream
 import scala.io.Source
 import scala.concurrent.Future
-import analogweb._, json4s._
+import analogweb._, circe._, io.circe._, generic.semiauto._
+import org.analogweb._
+import org.analogweb.core._
+import org.analogweb.scala._
 import org.analogweb.util.logging.Logs
-import org.analogweb._, scala._
 
 case class Member(name: String)
 
@@ -24,18 +26,22 @@ object HelloAnalogweb {
     case r: Renderable => log.debug("After"); r
   }
 
+  implicit val memberDecoder: Decoder[Member]   = deriveDecoder[Member]
+  implicit val memberEncoder: Encoder[Member]   = deriveEncoder[Member]
+  implicit val messageEncoder: Encoder[Message] = deriveEncoder[Message]
+
   val validateParameter = before { implicit r =>
     parameter.asOption[String]("n").map(x => pass()).getOrElse(reject(BadRequest))
   }
 
   val routes =
-    get("/ping") {
+    get("/ping") { _ =>
       "PONG"
     } ++
-      head("/healthcheck") {
+      head("/healthcheck") { _ =>
         Ok
       } ++
-      get("/future") {
+      get("/future") { _ =>
         for {
           one   <- Future(1)
           two   <- Future(2)
@@ -58,7 +64,7 @@ object HelloAnalogweb {
         s"Hello ${param("who")} World!"
       } ++
       get("/user-agent") { implicit r =>
-        s"Hello World ${r.headerOption("Member-Agent").getOrElse("Unknown")}"
+        s"Hello World ${r.headerOption("User-Agent").getOrElse("Unknown")}"
       } ++
       post("/upload") { implicit r =>
         multipart

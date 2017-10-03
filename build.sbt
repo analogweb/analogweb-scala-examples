@@ -23,11 +23,11 @@ val asmSettings = assemblySettings ++ Seq(
 
 val analogwebVersion = "0.10.1-SNAPSHOT"
 val allDependency = Seq(
-  "org.analogweb"  %% "analogweb-scala"  % analogwebVersion,
-  "org.analogweb"  %% "analogweb-json4s" % analogwebVersion,
-  "org.analogweb"  % "analogweb-netty"   % analogwebVersion,
-  "org.analogweb"  % "analogweb-slf4j"   % analogwebVersion,
-  "ch.qos.logback" % "logback-classic"   % "1.2.3"
+  "org.analogweb"  %% "analogweb-scala" % analogwebVersion,
+  "org.analogweb"  %% "analogweb-circe" % analogwebVersion,
+  "org.analogweb"  % "analogweb-netty"  % analogwebVersion,
+  "org.analogweb"  % "analogweb-slf4j"  % analogwebVersion,
+  "ch.qos.logback" % "logback-classic"  % "1.2.3"
 )
 
 val m2local  = Resolver.mavenLocal
