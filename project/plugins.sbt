@@ -1,11 +1,10 @@
-addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.4.0")
+//resolvers += "spray repo" at "http://repo.spray.io"
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.3.1")
 
-resolvers += "spray repo" at "http://repo.spray.io"
+addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "1.2.0")
 
-addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.1.4")
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.5")
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-scalariform" % "1.3.0")
+addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.2.2")
 
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.12.0")
-
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.0.3")
+addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.0")
