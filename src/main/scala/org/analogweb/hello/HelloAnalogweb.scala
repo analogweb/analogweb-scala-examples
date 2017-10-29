@@ -12,7 +12,7 @@ case class Message(message: String)
 
 object HelloAnalogweb {
 
-  def main(args: Array[String]) = http(
+  def main(args: Array[String]):Unit = http(
     "0.0.0.0",
     sys.props.get("http.port").getOrElse("8000").toInt
   )(routes).run
