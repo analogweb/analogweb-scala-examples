@@ -14,7 +14,7 @@ object HelloAnalogweb {
 
   def main(args: Array[String]) = http(
     "0.0.0.0",
-    sys.props.get("http.port").getOrElse("8000")
+    sys.props.get("http.port").getOrElse("8000").toInt
   )(routes).run
 
   // JSON Encoder and Decoders.(circe)
