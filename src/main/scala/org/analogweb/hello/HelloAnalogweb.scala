@@ -12,10 +12,11 @@ case class Message(message: String)
 
 object HelloAnalogweb {
 
-  def main(args: Array[String]):Unit = http(
-    "0.0.0.0",
-    sys.props.get("http.port").getOrElse("8000").toInt
-  )(routes).run
+  def main(args: Array[String]) = {
+    val port = sys.props.get("http.port").getOrElse("8000")
+    val uri = "0.0.0.0"
+    http(uri, port.toInt)(routes).run
+  }
 
   // JSON Encoder and Decoders.(circe)
   implicit val memberDecoder: Decoder[Member]   = deriveDecoder[Member]
