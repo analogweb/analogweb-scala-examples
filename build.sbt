@@ -37,8 +37,6 @@ val allResolver = Seq(
   sonatype
 )
 
-fork in run := true
-
 lazy val root =
   (project in file("."))
     .settings(buildSettings: _*)
