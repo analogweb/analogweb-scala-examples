@@ -1,7 +1,7 @@
 Analogweb Framework Scala Examples
 ===============================================
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=analogweb-scala&root=ping&style=flat)](https://analogweb-scala.herokuapp.com/helloworld)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=analogweb-scala-examples&root=ping&style=flat)](https://analogweb-scala-examples.herokuapp.com/json)
 
 # Quick Start
 
@@ -9,7 +9,7 @@ Analogweb Framework Scala Examples
 
 Installing [Scala](http://www.scala-lang.org/) and [sbt](http://www.scala-sbt.org) then run.
 
-```
+```scala
 $ sbt
 ...
 sbt:analogweb-scala-example> reStart
@@ -17,7 +17,7 @@ sbt:analogweb-scala-example> reStart
 
 And you will get
 
-```
+```bash
 $ curl localhost:8000/json
 $ {"message":"Hello, World!"}
 ```
@@ -25,7 +25,7 @@ $ {"message":"Hello, World!"}
 Here is a third run of benchmark with wrk and [Analogweb](https://analogweb.github.io) + [Netty](http://netty.io/index.html) + [Circe](https://circe.github.io/circe/)
 on [Mid-2014 MB Pro (2.9 GHz Intel Core i5 w/ 8G RAM)](https://support.apple.com/kb/SP703).
 
-```
+```bash
 $ wrk -c160 -t40 http://localhost:8000/json -v --latency
 wrk 4.0.0 [kqueue] Copyright (C) 2012 Will Glozer
 Running 10s test @ http://localhost:8000/json
