@@ -6,3 +6,4 @@ logs
 target
 .cache
 .cache-main
+.bsp
