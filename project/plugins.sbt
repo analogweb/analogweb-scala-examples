@@ -1,10 +1,7 @@
-//resolvers += "spray repo" at "http://repo.spray.io"
-addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.3.1")
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.5.3")
 
-addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "1.2.0")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.3")
 
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.5")
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "1.1.0")
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.2.2")
-
-addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.0")
+addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.9.5")

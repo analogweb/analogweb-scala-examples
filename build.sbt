@@ -3,7 +3,7 @@ import com.typesafe.sbt.packager.archetypes._
 
 val buildOrganization = "org.analogweb"
 val buildVersion      = "1"
-val buildScalaVersion = "2.12.4"
+val buildScalaVersion = "3.0.2"
 
 val buildSettings = Seq(
   organization := buildOrganization,
@@ -21,12 +21,12 @@ val asmSettings = assemblySettings ++ Seq(
   }
 )
 
-val analogwebVersion = "0.10.1"
+val analogwebVersion = "0.13.0-SNAPSHOT"
 val allDependency = Seq(
   "org.analogweb"  %% "analogweb-scala" % analogwebVersion,
   "org.analogweb"  %% "analogweb-circe" % analogwebVersion,
-  "org.analogweb"  % "analogweb-netty"  % analogwebVersion,
-  "org.analogweb"  % "analogweb-slf4j"  % analogwebVersion,
+  "org.analogweb"  % "analogweb-netty"  % "0.11.5",
+  "org.analogweb"  % "analogweb-slf4j"  % "0.11.0",
   "ch.qos.logback" % "logback-classic"  % "1.2.3"
 )
 
