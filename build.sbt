@@ -3,7 +3,7 @@ import com.typesafe.sbt.packager.archetypes._
 
 val buildOrganization = "org.analogweb"
 val buildVersion      = "1"
-val buildScalaVersion = "2.13.8"
+val buildScalaVersion = "3.1.2"
 
 val buildSettings = Seq(
   organization := buildOrganization,
